@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Recursion test class.
+ * 
+ * @author Kornphon Noiprasert
+ * */
 public class Recursion {
 
 	public static void main(String[] args) {
@@ -15,16 +20,6 @@ public class Recursion {
 		list.add("c");
 		unique(list);
 		System.out.println(list);
-//		String[] x = new String[4];
-//		x[0] = "1";
-//		x[1] = "2";
-//		x[2] = "3";
-//		x[3] = "4";
-//
-//		System.out.println(x.length);
-//		x[2] = null;
-//		System.out.println(x.length);
-//		System.out.println(x[2]);
 	}
 
 	/**
@@ -37,15 +32,6 @@ public class Recursion {
 	 * @return reference to the list parameter with consecutive duplicates removed.
 	 */
 	public static List<?> unique(List<?> list) {
-		//First 
-//		if (list.size() < 2)
-//			return list;
-//		if (list.get(list.size() - 1).equals((list.get(list.size() - 2)))) {
-//			list.remove(list.size() - 1);
-//			return unique(list);
-//		}
-//		return unique(list.subList(0, list.size() - 1));
-		//Second
 		if (list.size() < 2)
 			return list;
 		if (list.get(0) == list.get(1)) {
@@ -54,4 +40,49 @@ public class Recursion {
 		}
 		return unique(list.subList(1, list.size()));
 	}
+
+	/**
+	 * Fibonacci method with slow computation.
+	 * 
+	 * @param number of fibonnaci function.
+	 * @return sum of fibonacci function number.
+	 */
+	public static long fibonacci(int number) {
+		if (number < 2)
+			return number;
+		return fibonacci(number - 1) + fibonacci(number - 2);
+	}
+
+	/**
+	 * Fibonacci method with faster computation.
+	 * 
+	 * @param number of fibonnaci function.
+	 * @return sum of fibonacci function number.
+	 */
+	public static long quickFibonacci(long number) {
+		long start = 1;
+		long fibonacci1 = 1;
+		long fibonacci0 = 0;
+		if (number < 2)
+			return number;
+		return helperFibonacci(number, start, fibonacci1, fibonacci0);
+
+	}
+
+	/**
+	 * helperFibonacci helps quickFibonacci computation faster.
+	 * 
+	 * @param number of fibonnaci function.
+	 * @param count the cursor of fibonacci.
+	 * @param sum of two previous fibonacci number.
+	 * @param the number that 'start' point the cursor.
+	 * @return sum of fibonacci function number.
+	 */
+	public static long helperFibonacci(long n, long start, long num1, long num2) {
+		long current = start + 1;
+		long sum = num1 + num2;
+		if (n == current) return sum;
+		return helperFibonacci(n, current, sum, num1);
+	}
+
 }
